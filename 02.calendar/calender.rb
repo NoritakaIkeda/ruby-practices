@@ -1,6 +1,9 @@
 require "optparse"
 require "date"
 
+FIRST_DAY_OF_MONTH = 1
+LAST_DAY_OF_MONTH = -1
+
 def main
   options = parse_options
 
@@ -37,17 +40,17 @@ def parse_options
 end
 
 def print_calendar(month, year)
-  first_day_of_month = Date.new(year, month, 1).cwday
-  last_day_of_month = Date.new(year, month, -1).day
-
+  day_of_the_week = Date.new(year, month, FIRST_DAY_OF_MONTH).cwday
+  days_of_month = Date.new(year, month, LAST_DAY_OF_MONTH).day
+  
   puts "      #{month}月 #{year}    "
   puts " 日 月 火 水 木 金 土"
 
-  print "   " * first_day_of_month
+  print "   " * day_of_the_week
 
-  (1..last_day_of_month).each do |day|
+  (1..days_of_month).each do |day|
     print "%3d" % day
-    puts if (day + first_day_of_month) % 7 == 0
+    puts if (day + day_of_the_week) % 7 == 0
   end
 
   puts
