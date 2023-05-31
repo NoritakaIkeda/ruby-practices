@@ -10,4 +10,6 @@ def fizzbuzz(number)
   end
 end
 
-puts fizzbuzz(1)
+1.upto 20 do |i|
+  puts fizzbuzz(i)
+end
